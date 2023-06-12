@@ -2,7 +2,7 @@
 
 # Focus App
 
-### Productivity application to help organize your daily tasks and store your important files.
+### Productivity application to help organize your daily tasks with an intuitive UI.
 
 ### 🔗 [**Live demo**]()
 

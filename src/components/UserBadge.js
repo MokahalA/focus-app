@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Avatar, Box, Text, Flex } from '@chakra-ui/react';
+import { Avatar, Box, Text, Flex, useBreakpointValue } from '@chakra-ui/react';
 import { auth } from '../firebase/firebase';
 
 function UserBadge() {
@@ -17,17 +17,17 @@ function UserBadge() {
     return () => unsubscribe();
   }, []);
 
-  if (!user) {
-    return null; // Render nothing if there is no signed-in user
+  const isUserBadgeVisible = useBreakpointValue({ base: false, md: true });
+
+  if (!user || !isUserBadgeVisible) {
+    return null; // Render nothing if there is no signed-in user or on small screens
   }
 
   return (
-    <Flex mt="2" border='1px' borderStyle="groove" rounded="md" p="2" >
+    <Flex mt="2" border="1px" borderStyle="groove" rounded="md" p="2">
       <Avatar src={user.photoURL} />
       <Box ml="3">
-        <Text fontWeight="bold">
-          {user.displayName}
-        </Text>
+        <Text fontWeight="bold">{user.displayName}</Text>
         <Text fontSize="sm">{user.email}</Text>
       </Box>
     </Flex>
