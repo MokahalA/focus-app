@@ -4,7 +4,9 @@
 
 ### Productivity application to help organize your daily tasks with an intuitive UI.
 
-### 🔗 [**Live demo**]()
+### 🔗 [**Live demo**](https://gentle-dodol-dc3d4e.netlify.app)
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/cedd265e-ed2b-4e5a-b13f-1a7e55f938eb/deploy-status)](https://app.netlify.com/sites/gentle-dodol-dc3d4e/deploys)
 
 </div>
 
