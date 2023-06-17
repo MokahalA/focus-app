@@ -6,6 +6,7 @@ import {
   Image,
   Box,
   Skeleton,
+  Checkbox,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { firestore, auth } from '../firebase/firebase';
@@ -35,6 +36,21 @@ export default function TaskList() {
 
     return () => unsubscribe();
   }, [user.uid]);
+
+  const handleTaskStatusChange = async (taskId, status) => {
+    try {
+      await firestore
+        .collection('users')
+        .doc(user.uid)
+        .collection('tasks')
+        .doc(taskId)
+        .update({
+          status: status,
+        });
+    } catch (error) {
+      console.error('Error updating task status:', error);
+    }
+  };
 
   if (loading) {
     return (
@@ -68,7 +84,19 @@ export default function TaskList() {
       >
         {tasks.map((task) => (
           <HStack key={task.id}>
-            <Text flex="1">{task.text}</Text>
+            <Checkbox
+              size='lg'
+              isChecked={task.status === 'complete'}
+              onChange={(e) =>
+                handleTaskStatusChange(
+                  task.id,
+                  e.target.checked ? 'complete' : 'incomplete'
+                )
+              }
+            />
+            <Text marginLeft='5px' flex="1" textDecoration={task.status === 'complete' ? 'line-through' : 'none'}>
+              {task.text}
+            </Text>
             <DeleteTask id={task.id} />
           </HStack>
         ))}

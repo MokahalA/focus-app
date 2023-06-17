@@ -17,6 +17,7 @@ export default function AddTask() {
       await firestore.collection('users').doc(user.uid).collection('tasks').add({
         text: text,
         created_at: new Date().getTime(),
+        status: 'incomplete', // Set the initial status as 'incomplete'
       });
 
       // Reset the input field
